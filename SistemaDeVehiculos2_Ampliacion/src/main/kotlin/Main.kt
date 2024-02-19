@@ -1,7 +1,9 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import kotlin.math.roundToInt
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+
+    val vehiculo = Vehiculo("Toyota", "Corolla", 50f, 5.995f, 10000)
+
+    println(vehiculo.calcularAutonomia())
+    println((2345.6).roundToInt())
 }
