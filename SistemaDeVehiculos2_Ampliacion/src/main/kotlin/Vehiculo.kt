@@ -8,14 +8,22 @@ import kotlin.math.roundToInt
  * @property combustibleActual La cantidad actual de combustible en el tanque del vehículo en litros.
  * @property kilometrosActuales El total de kilómetros recorridos por el vehículo.
  */
-open class Vehiculo (val marca: String, val modelo: String, val capacidadCombustible: Float, var combustibleActual: Float, var kilometrosActuales: Int){
+open class Vehiculo (val marca: String, val modelo: String, vcapacidadCombustible: Float, combustibleActual: Float, var kilometrosActuales: Int){
 
+    var combustibleActual = combustibleActual.redondear(2)
+
+    val capacidadCombustible = vcapacidadCombustible.redondear(2)
+
+    companion object{
+        const val KM_POR_LITRO = 10.0f
+    }
+    
     /**
      * Retorna los kilómetros que el vehículo puede recorrer con el combustible actual (suponemos que cada litro da para 10 km)
      * @return String - Cadena de texto inormando de los km que se pueden recorrer
      */
     fun obtenerInformacion(): String {
-        return "El vehiculo actualmente puede recorrer: ${combustibleActual * 10} kms"
+        return "El vehiculo actualmente puede recorrer: ${combustibleActual * KM_POR_LITRO} kms"
     }
 
     /**
@@ -23,9 +31,7 @@ open class Vehiculo (val marca: String, val modelo: String, val capacidadCombust
      * @return Int - La autonomia
      */
     open fun calcularAutonomia(): Int{
-//        val autonomia = combustibleActual * 10
-//        return ((autonomia*100).roundToInt()) / 100
-        return (combustibleActual * 10).toInt()
+        return (combustibleActual * KM_POR_LITRO).toInt()
     }
 
     /**
@@ -38,7 +44,7 @@ open class Vehiculo (val marca: String, val modelo: String, val capacidadCombust
 
         val distanciaRecorrida = if (autonomia > distancia) distancia else autonomia
 
-        combustibleActual -= distanciaRecorrida / 10
+        combustibleActual -= distanciaRecorrida / KM_POR_LITRO
         kilometrosActuales += distanciaRecorrida
 
         return distancia - distanciaRecorrida
@@ -51,19 +57,23 @@ open class Vehiculo (val marca: String, val modelo: String, val capacidadCombust
      */
     fun repostar(cantidad: Float = 0f): Float{
         val espacioTanque = capacidadCombustible - combustibleActual
-        var cantidadRepostada = 0f
+        var cantidadRepostada: Float
         if (cantidad <= 0 ) {
             combustibleActual = capacidadCombustible
+            cantidadRepostada =  espacioTanque
+            println("Has llenado el tanque")
         } else{
             if (cantidad < espacioTanque){
                 combustibleActual += cantidad
                 cantidadRepostada = cantidad
+                println("Has repostado $cantidadRepostada litros")
             } else {
                 combustibleActual = capacidadCombustible
                 cantidadRepostada =  espacioTanque
+                println("Has repostado $cantidadRepostada litros")
             }
         }
-        return redondear(cantidadRepostada)
+        return cantidadRepostada.redondear(2)
     }
 
     /**

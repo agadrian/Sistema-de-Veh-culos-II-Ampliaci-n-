@@ -10,19 +10,26 @@
  * @param combustibleActual La cantidad actual de combustible en el tanque del automóvil en litros.
  * @param kilometrosActuales El total de kilómetros recorridos por el automóvil.
  */
-class Automovil(val esElectrico: Boolean, val condicionBritanica: Boolean, marca: String, modelo: String, capacidadCombustible: Float, combustibleActual: Float, kilometrosActuales: Int) : Vehiculo(marca, modelo, capacidadCombustible, combustibleActual, kilometrosActuales) {
+class Automovil(val esElectrico: Boolean,  var condicionBritanica: Boolean, marca: String, modelo: String, capacidadCombustible: Float, combustibleActual: Float, kilometrosActuales: Int) : Vehiculo(marca, modelo, capacidadCombustible, combustibleActual, kilometrosActuales) {
 
 
     override fun calcularAutonomia(): Int {
-        return (super.calcularAutonomia()) / 2
+        return if (esElectrico) {
+            (super.calcularAutonomia() * 1.5).toInt()
+        }else{
+            (super.calcularAutonomia())
+        }
     }
 
     /**
      * Método de clase que permite modificar la configuración de conducción británica para todos los automóviles.
-     */
-    fun cambiarCondicionBritanica(nuevaCondicion: Boolean){
-
-    }
+     *//*
+    companion object{
+        fun cambiarCondicionBritanica(condnuevaCondicion: Boolean){
+            var condicionBritanica: Boolean
+            condicionBritanica = nuevaCondicion
+        }
+    }*/
 
     /**
      * método que simula un derrape. Realiza una gasto adicional en el combustible retornando el combustible restante. El gasto equivale a haber realizado 5 kilómetros.
