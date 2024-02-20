@@ -8,11 +8,11 @@ import kotlin.math.roundToInt
  * @property combustibleActual La cantidad actual de combustible en el tanque del vehículo en litros.
  * @property kilometrosActuales El total de kilómetros recorridos por el vehículo.
  */
-open class Vehiculo (val marca: String, val modelo: String, vcapacidadCombustible: Float, combustibleActual: Float, var kilometrosActuales: Int){
+open class Vehiculo (val marca: String, val modelo: String, capacidadCombustible: Float, combustibleActual: Float, var kilometrosActuales: Int){
 
     var combustibleActual = combustibleActual.redondear(2)
 
-    val capacidadCombustible = vcapacidadCombustible.redondear(2)
+    val capacidadCombustible = capacidadCombustible.redondear(2)
 
     companion object{
         const val KM_POR_LITRO = 10.0f
@@ -57,11 +57,11 @@ open class Vehiculo (val marca: String, val modelo: String, vcapacidadCombustibl
      */
     fun repostar(cantidad: Float = 0f): Float{
         val espacioTanque = capacidadCombustible - combustibleActual
-        var cantidadRepostada: Float
+        val cantidadRepostada: Float
         if (cantidad <= 0 ) {
             combustibleActual = capacidadCombustible
             cantidadRepostada =  espacioTanque
-            println("Has llenado el tanque")
+            println("Has repostado $cantidadRepostada litros. Tanque lleno")
         } else{
             if (cantidad < espacioTanque){
                 combustibleActual += cantidad
@@ -70,7 +70,7 @@ open class Vehiculo (val marca: String, val modelo: String, vcapacidadCombustibl
             } else {
                 combustibleActual = capacidadCombustible
                 cantidadRepostada =  espacioTanque
-                println("Has repostado $cantidadRepostada litros")
+                println("Has repostado $cantidadRepostada litros. Tanque lleno")
             }
         }
         return cantidadRepostada.redondear(2)
@@ -83,6 +83,10 @@ open class Vehiculo (val marca: String, val modelo: String, vcapacidadCombustibl
      */
     private fun redondear(numeroARedondear: Float): Float{
         return "%.2f".format(numeroARedondear).toFloat()
+    }
+
+    override fun toString(): String {
+        return "Marca: $marca ; Modelo: $modelo ; CapacidadCombustible: $capacidadCombustible ; CombustibleActual: $combustibleActual ; KmActuales: $kilometrosActuales ; Autonomia: ${calcularAutonomia()}"
     }
 
 }

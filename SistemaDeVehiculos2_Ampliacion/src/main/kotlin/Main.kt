@@ -16,20 +16,33 @@ fun main() {
     val moto = Motocicleta(600, "Honda", "CBR600RR", 150f, 100f, 50)
 
 
-    println(" Combustible actuial: ${ vehiculo.combustibleActual }")
-    println(vehiculo.repostar())
-    println(" Combustible actuial: ${ vehiculo.combustibleActual }")
-    println(vehiculo.capacidadCombustible)
+    println("****************VEHICULO**************")
+    println(vehiculo)
+    println("Combustible actual: ${ vehiculo.combustibleActual }")
+    vehiculo.repostar(23f)
+    println("Combustible actual: ${ vehiculo.combustibleActual }")
+    println(vehiculo.obtenerInformacion())
+    println("Combustible actual: ${ vehiculo.combustibleActual }")
 
+    println()
 
-    println(automovil.calcularAutonomia())
-    println(moto.calcularAutonomia())
+    println("****************AUTOMOVIL**************")
+    println(automovil)
+    println("Combustible actual: ${ automovil.combustibleActual }")
+    automovil.repostar(-5f)
+    println("Combustible actual: ${ automovil.combustibleActual }")
+    println("Autonomia actual: ${automovil.calcularAutonomia()}")
+    println("Combustible actual: ${ automovil.combustibleActual }")
 
-    println(vehiculo.realizaViaje(150))
-    println(automovil.realizaViaje(150))
-    println(moto.realizaViaje(150))
+    println()
 
-    println(vehiculo.calcularAutonomia())
-    println(automovil.calcularAutonomia())
-    println(moto.calcularAutonomia())
+    println("****************MOTO**************")
+    println(moto)
+    moto.repostar(3f)
+    println(moto)
+    moto.realizarCaballito()
+    println(moto)
+    moto.realizaViaje(50)
+    println(moto)
+
 }

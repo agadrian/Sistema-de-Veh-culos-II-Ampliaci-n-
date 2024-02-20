@@ -5,15 +5,21 @@ class Motocicleta(val cilindrada: Int, marca: String, modelo: String, capacidadC
         return (super.calcularAutonomia()) * 2
     }
 
-
+// TODO : ESTA MAL
     override fun realizaViaje(distancia: Int): Int {
-        return (super.realizaViaje(distancia)) * 2
+        val distanciaRecorrida = super.realizaViaje(distancia)
+        kilometrosActuales += distanciaRecorrida *2
+        return distanciaRecorrida
     }
 
     fun realizarCaballito(): Float{
         println("Has hecho un wheelie")
         combustibleActual -= 0.25f
         return combustibleActual
+    }
+
+    override fun toString(): String {
+        return super.toString() + " ; Cilindrada: $cilindrada ; Autonomia: ${calcularAutonomia()} ; Kilometors Actuales : $kilometrosActuales"
     }
 
 }

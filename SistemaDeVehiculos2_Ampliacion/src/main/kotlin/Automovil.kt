@@ -41,4 +41,8 @@ class Automovil(val esElectrico: Boolean,  var condicionBritanica: Boolean, marc
         return combustibleActual
     }
 
+    override fun toString(): String {
+        return super.toString() + " ; EsElectrico: $esElectrico ; CondicionBritanica: $condicionBritanica ; Autonomia: ${calcularAutonomia()}"
+    }
+
 }
